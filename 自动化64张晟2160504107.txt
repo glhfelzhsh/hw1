@@ -1,0 +1,83 @@
+Gray_Level_Transformation.m
+img=[];
+img=imread('lena.bmp');
+imgt=[];
+t=double(img);
+for i=1:-1:0
+    for j=4:-1:1
+        t=double(img);
+        k=i*4+j;
+        subplot(2,4,9-k);
+        title(['k=' num2str(k)]);
+        t=2^(8-k)*fix(t/(2^(8-k)));
+        
+        imgt=uint8(t);
+        imshow(imgt);
+        imwrite(imgt,['k=' num2str(k) '.bmp']);
+    end
+end
+p=getframe(gcf);
+imwrite(p.cdata,['total.bmp']);
+
+MeanValueAndVarianceCalculation.m
+img=imread('lena.bmp');
+t=double(img);
+mean_value=mean2(t)
+variance=std2(t)^2
+
+t4_zoom.m
+img=imread('lena.bmp');
+img1=imresize(img,[2048 2048],'nearest');
+imwrite(img1,'t4_nearest.bmp');
+img2=imresize(img,[2048 2048],'bilinear');
+imwrite(img2,'t4_bilinear.bmp');
+img3=imresize(img,[2048 2048],'bicubic');
+imwrite(img3,'t4_bicubic.bmp');
+subplot(1,3,1)
+imshow(img1);
+subplot(1,3,2)
+imshow(img2);
+subplot(1,3,3)
+imshow(img3);
+
+shear.m
+img1=imread('lena.bmp');
+img2=imread('elain1.bmp');
+h=[1,1.5,0;0,1,0;0,0,1];
+t=maketform('affine',h);
+img10=imtransform(img1,t);
+img11=imresize(img10,[2048 2048],'nearest');
+imwrite(img11,'lean_shear_nearest.bmp');
+img12=imresize(img10,[2048 2048],'bilinear');
+imwrite(img12,'lean_shear_bilinear.bmp');
+img13=imresize(img10,[2048 2048],'bicubic');
+imwrite(img13,'lean_shear_bicubic.bmp');
+img20=imtransform(img2,t);
+img21=imresize(img20,[2048 2048],'nearest');
+imwrite(img21,'elain_shear_nearest.bmp');
+img22=imresize(img20,[2048 2048],'bilinear');
+imwrite(img22,'elain_shear_bilinear.bmp');
+img23=imresize(img20,[2048 2048],'bicubic');
+imwrite(img23,'elain_shear_bicubic.bmp');
+
+rotate.m
+img1=imread('lena.bmp');
+img2=imread('elain1.bmp');
+img110=imrotate(img1,30,'nearest');
+img111=imresize(img110,[2048 2048],'nearest');
+imwrite(img111,'lena_rotate_nearest.bmp');
+img120=imrotate(img1,30,'bilinear');
+img121=imresize(img120,[2048 2048],'bilinear');
+imwrite(img121,'lena_rotate_bilinear.bmp');
+img130=imrotate(img1,30,'bicubic');
+img131=imresize(img130,[2048 2048],'bicubic');
+imwrite(img131,'lena_rotate_bicubic.bmp');
+img210=imrotate(img2,30,'nearest');
+img211=imresize(img210,[2048 2048],'nearest');
+imwrite(img211,'elain_rotate_nearest.bmp');
+img220=imrotate(img2,30,'bilinear');
+img221=imresize(img220,[2048 2048],'bilinear');
+imwrite(img221,'elain_rotate_bilinear.bmp');
+img230=imrotate(img2,30,'bicubic');
+img231=imresize(img230,[2048 2048],'bicubic');
+imwrite(img231,'elain_rotate_bicubic.bmp');
